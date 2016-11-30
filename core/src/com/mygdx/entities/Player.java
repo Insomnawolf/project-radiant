@@ -31,9 +31,12 @@ public class Player{
         sprite = new Sprite(img);
         this.collisionLayer = collisionLayer;
         collisionDetector = new PlayerCollisionDetector(this, collisionLayer);
-        posX = 50;
-        posY = 50;
+        posX = 100;
+        posY = 100;
         camera = new OrthographicCamera();
+        sprite.setOrigin(0, 0);
+        sprite.setBounds(posX, posY, sprite.getWidth(), sprite.getHeight()/2);
+        sprite.setScale(1, 2);
     }
 
     public void update()

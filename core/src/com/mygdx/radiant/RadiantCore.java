@@ -39,7 +39,7 @@ public class RadiantCore extends Game {
 	{
 		switch(state) {
 			case SPLASH:
-				currentScreen = screenHash.get("spash");
+				currentScreen = screenHash.get("splash");
 				break;
 			case MENU:
 				currentScreen = screenHash.get("mainmenu");
