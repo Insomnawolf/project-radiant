@@ -23,7 +23,7 @@ public class Player{
     private PlayerCollisionDetector collisionDetector;
 
     //players stats
-    private int movementSpeed = 3;
+    private int movementSpeed = 13;
 
     public Player(TiledMapTileLayer collisionLayer)
     {

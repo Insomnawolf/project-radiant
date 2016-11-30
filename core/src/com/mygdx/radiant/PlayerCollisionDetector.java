@@ -1,5 +1,6 @@
 package com.mygdx.radiant;
 
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.entities.Player;
@@ -38,8 +39,12 @@ public class PlayerCollisionDetector {
         if(player.getVelocityX() < 0)
         {
             //top left tile collision test
-            collisionX = collisionLayer.getCell((int)(player.getPosX()/tileWidth), (int)((player.getPosY() + player.getSprite().getHeight())/tileHeight)).getTile().getProperties().containsKey("blocked");
-            //middle left tile collision test
+            try {
+                collisionX = collisionLayer.getCell((int) (player.getPosX() / tileWidth), (int) ((player.getPosY() + player.getSprite().getHeight()) / tileHeight)).getTile().getProperties().containsKey("blocked");
+            }catch(NullPointerException e){
+                System.out.print("Null 1");
+            }
+                //middle left tile collision test
             if(!collisionX)
                 collisionX = collisionLayer.getCell((int)(player.getPosX()/tileWidth), (int)((player.getPosY() + player.getSprite().getHeight()/2)/tileHeight)).getTile().getProperties().containsKey("blocked");
             //bottom left tile collision test
@@ -48,7 +53,11 @@ public class PlayerCollisionDetector {
         }
         else if(player.getVelocityX() > 0) {
             //top right tile collision test
-            collisionX = collisionLayer.getCell((int)((player.getPosX() + player.getSprite().getWidth())/tileWidth), (int)((player.getPosY() + player.getSprite().getHeight())/tileHeight)).getTile().getProperties().containsKey("blocked");
+            try {
+                collisionX = collisionLayer.getCell((int)((player.getPosX() + player.getSprite().getWidth())/tileWidth), (int)((player.getPosY() + player.getSprite().getHeight())/tileHeight)).getTile().getProperties().containsKey("blocked");
+            }catch(NullPointerException e){
+                System.out.print("Null 2");
+            }
             //middle right tile collision test
             if(!collisionX)
                 collisionX = collisionLayer.getCell((int)((player.getPosX() + player.getSprite().getWidth())/tileWidth), (int)((player.getPosY() + player.getSprite().getHeight()/2)/tileHeight)).getTile().getProperties().containsKey("blocked");
