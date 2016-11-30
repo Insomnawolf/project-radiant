@@ -12,21 +12,12 @@ import com.mygdx.radiant.PlayerCollisionDetector;
  * Created by Edward Mondragon on 11/26/2016.
  */
 
-public class Player{
-    private float posX;
-    private float posY;
-    private Texture img;
-    private Sprite sprite;
+public class Player extends Entity {
+
     private OrthographicCamera camera;
-    private Vector2 velocity = new Vector2(0, 0);
-    private TiledMapTileLayer collisionLayer;
-    private PlayerCollisionDetector collisionDetector;
-
-    //players stats
-    private int movementSpeed = 3;
-
     public Player(TiledMapTileLayer collisionLayer)
     {
+        movementSpeed = 3;
         img = new Texture(Gdx.files.internal("warriorL.png"));
         sprite = new Sprite(img);
         this.collisionLayer = collisionLayer;
@@ -46,74 +37,12 @@ public class Player{
         sprite.setPosition(posX, posY);
     }
 
-    public boolean inBoundsCheck() {
-
-        float rightBounds = collisionLayer.getWidth() * collisionLayer.getTileWidth();
-        float upperBounds = collisionLayer.getHeight() * collisionLayer.getTileHeight();
-
-        if (posX + velocity.x < 0 && velocity.x <0) {
-            posX = 0;
-            return false;
-        }
-        if ((posX + sprite.getWidth() + velocity.x) >= rightBounds) {
-            posX = rightBounds - sprite.getWidth();
-            return false;
-        }
-        if (posY + velocity.y < 0)
-        {
-            posY = 0;
-            return false;
-        }
-        if((posY + sprite.getHeight() + velocity.y) >= upperBounds)
-        {
-            posY = upperBounds - sprite.getHeight();
-            return false;
-        }
-        return true;
-    }
-
-    public float getVelocityX() {
-        return velocity.x;
-    }
-
-    public float getVelocityY() {
-        return velocity.y;
-    }
-
-    public void setVelocityX(float velocityX) {
-        velocity.x = velocityX;
-    }
-
-    public void setVelocityY(float velocityY) { velocity.y = velocityY; }
-
-    public OrthographicCamera getCamera() {
-        return camera;
-    }
 
     public void setCamera(OrthographicCamera camera) {
         this.camera = camera;
     }
-
-    public float getPosY() {
-        return posY;
-    }
-
-    public void setPosY(float posY) {
-        this.posY = posY;
-    }
-
-    public float getPosX() {
-        return posX;
-    }
-
-    public void setPosX(float posX) {
-        this.posX = posX;
-    }
-
-    public int getMovementSpeed(){return movementSpeed;}
-
-    public Sprite getSprite() {
-        return sprite;
+    public OrthographicCamera getCamera() {
+        return camera;
     }
 
     public void dispose()
