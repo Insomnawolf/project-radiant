@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.radiant.PlayerCollisionDetector;
+import com.mygdx.radiant.CollisionDetector;
 
 /**
  * Created by Edward Mondragon on 11/26/2016.
@@ -15,18 +15,16 @@ import com.mygdx.radiant.PlayerCollisionDetector;
 public class Player extends Entity {
 
     private OrthographicCamera camera;
-    public Player(TiledMapTileLayer collisionLayer)
+
+    public Player(TiledMapTileLayer collisionLayer, Vector2 position)
     {
+        super(collisionLayer, position);
         movementSpeed = 3;
         img = new Texture(Gdx.files.internal("warriorL.png"));
         sprite = new Sprite(img);
-        this.collisionLayer = collisionLayer;
-        collisionDetector = new PlayerCollisionDetector(this, collisionLayer);
-        posX = 100;
-        posY = 100;
         camera = new OrthographicCamera();
         sprite.setOrigin(0, 0);
-        sprite.setBounds(posX, posY, sprite.getWidth(), sprite.getHeight()/2);
+        sprite.setBounds(position.x, position.y, sprite.getWidth(), sprite.getHeight()/2);
         sprite.setScale(1, 2);
     }
 
@@ -34,7 +32,7 @@ public class Player extends Entity {
     {
         if(inBoundsCheck())
             collisionDetector.collision();
-        sprite.setPosition(posX, posY);
+        sprite.setPosition(position.x, position.y);
     }
 
 

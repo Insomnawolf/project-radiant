@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.graphics.renderer.OrthogonalTiledMapSpriteRenderer;
 import com.mygdx.entities.Player;
 import com.mygdx.radiant.RadiantCore;
@@ -31,7 +32,7 @@ public class GameScreen extends ScreenAdapter{
         float height = Gdx.graphics.getHeight();
         tiledMap = new TmxMapLoader().load("test.tmx");
         tiledMapRenderer = new OrthogonalTiledMapSpriteRenderer(tiledMap);
-        player = new Player((TiledMapTileLayer)tiledMap.getLayers().get(0));
+        player = new Player((TiledMapTileLayer)tiledMap.getLayers().get(0), new Vector2(100, 100));
         camera = player.getCamera();
         camera.setToOrtho(false, width, height);
         camera.update();

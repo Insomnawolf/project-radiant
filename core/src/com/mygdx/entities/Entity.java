@@ -1,11 +1,10 @@
 package com.mygdx.entities;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.radiant.PlayerCollisionDetector;
+import com.mygdx.radiant.CollisionDetector;
 
 /**
  * Created by Clifford Hill on 11/30/2016.
@@ -13,36 +12,41 @@ import com.mygdx.radiant.PlayerCollisionDetector;
 
 public abstract class Entity {
 
-    protected float posX;
-    protected float posY;
+    protected Vector2 position;
     protected Texture img;
     protected Sprite sprite;
     protected Vector2 velocity = new Vector2(0, 0);
     protected TiledMapTileLayer collisionLayer;
-    protected PlayerCollisionDetector collisionDetector;
+    protected CollisionDetector collisionDetector;
     protected int movementSpeed;
+
+    public Entity(TiledMapTileLayer collisionLayer, Vector2 position) {
+        this.position = position;
+        this.collisionLayer = collisionLayer;
+        collisionDetector = new CollisionDetector(this, collisionLayer);
+    }
 
     public boolean inBoundsCheck() {
 
         float rightBounds = collisionLayer.getWidth() * collisionLayer.getTileWidth();
         float upperBounds = collisionLayer.getHeight() * collisionLayer.getTileHeight();
 
-        if (posX + velocity.x < 0 && velocity.x <0) {
-            posX = 0;
+        if (position.x + velocity.x < 0 && velocity.x <0) {
+            position.x = 0;
             return false;
         }
-        if ((posX + sprite.getWidth() + velocity.x) >= rightBounds) {
-            posX = rightBounds - sprite.getWidth();
+        if ((position.x + sprite.getWidth() + velocity.x) >= rightBounds) {
+            position.x = rightBounds - sprite.getWidth();
             return false;
         }
-        if (posY + velocity.y < 0)
+        if (position.y + velocity.y < 0)
         {
-            posY = 0;
+            position.y = 0;
             return false;
         }
-        if((posY + sprite.getHeight() + velocity.y) >= upperBounds)
+        if((position.y + sprite.getHeight() + velocity.y) >= upperBounds)
         {
-            posY = upperBounds - sprite.getHeight();
+            position.y = upperBounds - sprite.getHeight();
             return false;
         }
         return true;
@@ -65,19 +69,19 @@ public abstract class Entity {
 
 
     public float getPosY() {
-        return posY;
+        return position.y;
     }
 
-    public void setPosY(float posY) {
-        this.posY = posY;
+    public void setPosY(float positionY) {
+        this.position.y = positionY;
     }
 
     public float getPosX() {
-        return posX;
+        return position.x;
     }
 
-    public void setPosX(float posX) {
-        this.posX = posX;
+    public void setPosX(float positionX) {
+        this.position.x = positionX;
     }
 
     public int getMovementSpeed(){return movementSpeed;}
