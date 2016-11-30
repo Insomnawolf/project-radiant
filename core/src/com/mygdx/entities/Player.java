@@ -22,6 +22,9 @@ public class Player{
     private TiledMapTileLayer collisionLayer;
     private PlayerCollisionDetector collisionDetector;
 
+    //players stats
+    private int movementSpeed = 3;
+
     public Player(TiledMapTileLayer collisionLayer)
     {
         img = new Texture(Gdx.files.internal("warriorL.png"));
@@ -103,6 +106,8 @@ public class Player{
     public void setPosX(float posX) {
         this.posX = posX;
     }
+
+    public int getMovementSpeed(){return movementSpeed;}
 
     public Sprite getSprite() {
         return sprite;

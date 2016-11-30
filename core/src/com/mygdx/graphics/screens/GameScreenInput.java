@@ -29,13 +29,13 @@ public class GameScreenInput implements InputProcessor {
     public void processInput()
     {
         if(isPressedRight)
-            player.setVelocityX(3);
+            player.setVelocityX(player.getMovementSpeed());
         if(isPressedLeft )
-            player.setVelocityX(-3);
+            player.setVelocityX(-player.getMovementSpeed());
         if(isPressedUp)
-            player.setVelocityY(3);
+            player.setVelocityY(player.getMovementSpeed());
         if(isPressedDown)
-            player.setVelocityY(-3);
+            player.setVelocityY(-player.getMovementSpeed());
     }
 
     @Override
