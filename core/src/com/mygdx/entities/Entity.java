@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.StringBuilder;
 import com.mygdx.radiant.PlayerCollisionDetector;
 
 /**
@@ -21,6 +22,9 @@ public abstract class Entity {
     protected TiledMapTileLayer collisionLayer;
     protected PlayerCollisionDetector collisionDetector;
     protected int movementSpeed;
+    protected String statusAilment;
+
+
 
     public boolean inBoundsCheck() {
 
@@ -61,8 +65,6 @@ public abstract class Entity {
     }
 
     public void setVelocityY(float velocityY) { velocity.y = velocityY; }
-
-
 
     public float getPosY() {
         return posY;
