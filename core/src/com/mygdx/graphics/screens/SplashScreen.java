@@ -1,9 +1,10 @@
-package com.mygdx.radiant;
+package com.mygdx.graphics.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.mygdx.radiant.RadiantCore;
 
 public class SplashScreen extends ScreenAdapter {
 
@@ -15,7 +16,7 @@ public class SplashScreen extends ScreenAdapter {
         this.game = game;
         System.out.println("Splash screen loaded.");
 
-        game.setScreen(new MainMenuScreen(game));
+        game.setScreen(new com.mygdx.graphics.screens.MainMenuScreen(game));
 
     }
 

@@ -1,4 +1,4 @@
-package com.mygdx.radiant;
+package com.mygdx.graphics.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.radiant.RadiantCore;
 
 public class MainMenuScreen extends ScreenAdapter {
 
