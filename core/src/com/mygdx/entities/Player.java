@@ -23,7 +23,7 @@ public class Player{
     private PlayerCollisionDetector collisionDetector;
 
     //players stats
-    private int movementSpeed = 13;
+    private int movementSpeed = 3;
 
     public Player(TiledMapTileLayer collisionLayer)
     {
@@ -31,8 +31,8 @@ public class Player{
         sprite = new Sprite(img);
         this.collisionLayer = collisionLayer;
         collisionDetector = new PlayerCollisionDetector(this, collisionLayer);
-        posX = 10;
-        posY = 10;
+        posX = 50;
+        posY = 50;
         camera = new OrthographicCamera();
     }
 

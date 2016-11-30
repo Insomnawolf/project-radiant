@@ -40,35 +40,35 @@ public class GameScreenInput implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.A)
+        if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT)
             isPressedLeft = true;
-        if (keycode == Input.Keys.D)
+        if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT)
             isPressedRight = true;
-        if (keycode == Input.Keys.W)
+        if (keycode == Input.Keys.W || keycode == Input.Keys.UP)
             isPressedUp = true;
-        if(keycode == Input.Keys.S)
+        if(keycode == Input.Keys.S || keycode == Input.Keys.DOWN)
             isPressedDown = true;
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if(keycode == Input.Keys.A)
+        if(keycode == Input.Keys.A|| keycode == Input.Keys.LEFT)
         {
             player.setVelocityX(0);
             isPressedLeft = false;
         }
-        if(keycode == Input.Keys.D)
+        if(keycode == Input.Keys.D || keycode == Input.Keys.RIGHT)
         {
             player.setVelocityX(0);
             isPressedRight = false;
         }
-        if(keycode == Input.Keys.W)
+        if(keycode == Input.Keys.W || keycode == Input.Keys.UP)
         {
             player.setVelocityY(0);
             isPressedUp = false;
         }
-        if(keycode == Input.Keys.S)
+        if(keycode == Input.Keys.S || keycode == Input.Keys.DOWN)
         {
             player.setVelocityY(0);
             isPressedDown = false;
