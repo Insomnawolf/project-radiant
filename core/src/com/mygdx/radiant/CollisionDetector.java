@@ -5,6 +5,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.mygdx.entities.Entity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
 /**
  * Created by Edward Mondragon on 11/27/2016.
  */
@@ -14,11 +18,13 @@ public class CollisionDetector {
     private TiledMapTileLayer collisionLayer;
     private TiledMapTile tile;
 
-    private float oldX, oldY;
+    private float oldX, oldY, tileWidth, tileHeight;
 
     public CollisionDetector(Entity entity, TiledMapTileLayer collisionLayer) {
         this.entity = entity;
         this.collisionLayer = collisionLayer;
+        tileWidth = collisionLayer.getTileWidth();
+        tileHeight = collisionLayer.getTileHeight();
     }
 
    /* public boolean canMove()
@@ -30,7 +36,6 @@ public class CollisionDetector {
     {
         oldX = entity.getPosX();
         oldY = entity.getPosY();
-        float tileWidth = collisionLayer.getTileWidth(), tileHeight = collisionLayer.getTileHeight();
         boolean collisionX = false, collisionY = false;
 
         entity.setPosX(entity.getPosX() + entity.getVelocityX());
@@ -38,11 +43,7 @@ public class CollisionDetector {
         if(entity.getVelocityX() < 0)
         {
             //top left tile collision test
-            try {
                 collisionX = collisionLayer.getCell((int) (entity.getPosX() / tileWidth), (int) ((entity.getPosY() + entity.getSprite().getHeight()) / tileHeight)).getTile().getProperties().containsKey("blocked");
-            }catch(NullPointerException e){
-                System.out.print("Null 1");
-            }
                 //middle left tile collision test
             if(!collisionX)
                 collisionX = collisionLayer.getCell((int)(entity.getPosX()/tileWidth), (int)((entity.getPosY() + entity.getSprite().getHeight()/2)/tileHeight)).getTile().getProperties().containsKey("blocked");
@@ -52,11 +53,7 @@ public class CollisionDetector {
         }
         else if(entity.getVelocityX() > 0) {
             //top right tile collision test
-            try {
                 collisionX = collisionLayer.getCell((int)((entity.getPosX() + entity.getSprite().getWidth())/tileWidth), (int)((entity.getPosY() + entity.getSprite().getHeight())/tileHeight)).getTile().getProperties().containsKey("blocked");
-            }catch(NullPointerException e){
-                System.out.print("Null 2");
-            }
             //middle right tile collision test
             if(!collisionX)
                 collisionX = collisionLayer.getCell((int)((entity.getPosX() + entity.getSprite().getWidth())/tileWidth), (int)((entity.getPosY() + entity.getSprite().getHeight()/2)/tileHeight)).getTile().getProperties().containsKey("blocked");
@@ -104,5 +101,20 @@ public class CollisionDetector {
         }
 
         return (collisionX || collisionY);
+    }
+
+    public HashMap<Object, Float> checkEntityTile()
+    {
+        HashMap<Object, Float> tileProperties = new HashMap<Object, Float>();
+        Iterator propertyIT = collisionLayer.getCell((int)((entity.getPosX() + entity.getSprite().getWidth()/2)/tileWidth),(int)((entity.getPosY() + entity.getSprite().getHeight()/2)/tileHeight)).getTile().getProperties().getKeys();
+        Iterator valueIT = collisionLayer.getCell((int)((entity.getPosX() + entity.getSprite().getWidth()/2)/tileWidth),(int)((entity.getPosY() + entity.getSprite().getHeight()/2)/tileHeight)).getTile().getProperties().getValues();
+        while(propertyIT.hasNext())
+        {
+            String key = (String)propertyIT.next();
+            if(key.equals("speed"))
+                tileProperties.put(key, (Float)valueIT.next());
+        }
+
+        return tileProperties;
     }
 }

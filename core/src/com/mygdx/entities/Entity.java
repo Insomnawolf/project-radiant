@@ -18,7 +18,10 @@ public abstract class Entity {
     protected Vector2 velocity = new Vector2(0, 0);
     protected TiledMapTileLayer collisionLayer;
     protected CollisionDetector collisionDetector;
-    protected int movementSpeed;
+    protected float movementSpeed;
+    protected float baseSpeed;
+    protected String statusAilment;
+
 
     public Entity(TiledMapTileLayer collisionLayer, Vector2 position) {
         this.position = position;
@@ -84,7 +87,7 @@ public abstract class Entity {
         this.position.x = positionX;
     }
 
-    public int getMovementSpeed(){return movementSpeed;}
+    public float getMovementSpeed(){return movementSpeed;}
 
     public Sprite getSprite() {
         return sprite;
