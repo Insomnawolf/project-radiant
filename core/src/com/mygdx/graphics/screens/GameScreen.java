@@ -32,7 +32,10 @@ public class GameScreen extends ScreenAdapter{
         float height = Gdx.graphics.getHeight();
         tiledMap = new TmxMapLoader().load("test.tmx");
         tiledMapRenderer = new OrthogonalTiledMapSpriteRenderer(tiledMap);
-        player = new Player((TiledMapTileLayer)tiledMap.getLayers().get(0), new Vector2(100, 100));
+        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
+        float tileWidth = layer.getTileWidth();
+        float tileHeight = layer.getTileHeight();
+        player = new Player(layer, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2));
         camera = player.getCamera();
         camera.setToOrtho(false, width, height);
         camera.update();
