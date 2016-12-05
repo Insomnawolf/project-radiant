@@ -1,6 +1,7 @@
 package com.mygdx.Inventory;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier;
 
 /**
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.g3d.particles.influencers.DynamicsModifier;
 public abstract class Item {
     protected String name;
     protected Texture imgUI;                      // the image to display on the UI
+    protected Sprite sprite;
     protected Texture imgMap;                     // use this for displaying it on the map
     protected String description;                 // Items description
 
