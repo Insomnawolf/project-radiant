@@ -92,7 +92,9 @@ public abstract class Entity {
     public Sprite getSprite() {
         return sprite;
     }
-
+    public void dispose(){
+        img.dispose();
+    }
 
 
 

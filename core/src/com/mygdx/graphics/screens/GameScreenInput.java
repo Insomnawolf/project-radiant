@@ -76,7 +76,7 @@ public class GameScreenInput implements InputProcessor {
                 isPressedUp = false;
             }
 
-            if(mykeys.getMoveUp()== false){
+            if(mykeys.getMoveDown()== false){
                 player.setVelocityY(0);
                 isPressedDown = false;
             }
