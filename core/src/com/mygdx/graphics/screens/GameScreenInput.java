@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.entities.Player;
+import com.mygdx.radiant.CustomKeys;
 
 /**
  * Created by Edward Mondragon on 11/23/2016.
@@ -18,11 +19,12 @@ public class GameScreenInput implements InputProcessor {
     private TiledMapTileLayer collisionLayer;
     private double mobileScale = 1;
     private boolean isPressedUp, isPressedDown, isPressedRight, isPressedLeft;
-
+    private CustomKeys mykeys;
     public GameScreenInput(Player player, TiledMapTileLayer collisionLayer) {
         this.collisionLayer = collisionLayer;
         this.player = player;
         this.camera = player.getCamera();
+        mykeys = new CustomKeys();
     }
 
     public void processInput() {
