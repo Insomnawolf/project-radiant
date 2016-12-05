@@ -25,6 +25,15 @@ public class GameScreenInput implements InputProcessor {
         this.player = player;
         this.camera = player.getCamera();
         mykeys = new CustomKeys();
+        mykeys.addkey(Input.Keys.UP,CustomKeys.UPKEY);
+        mykeys.addkey(Input.Keys.W,CustomKeys.UPKEY);
+        mykeys.addkey(Input.Keys.DOWN, CustomKeys.DOWNKEY);
+        mykeys.addkey(Input.Keys.S, CustomKeys.DOWNKEY);
+        mykeys.addkey(Input.Keys.RIGHT, CustomKeys.RIGHTKEY);
+        mykeys.addkey(Input.Keys.D, CustomKeys.RIGHTKEY);
+        mykeys.addkey(Input.Keys.LEFT, CustomKeys.LEFTKEY);
+        mykeys.addkey(Input.Keys.A, CustomKeys.LEFTKEY);
+
     }
 
     public void processInput() {
@@ -40,35 +49,47 @@ public class GameScreenInput implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        mykeys.pushkey(keycode);
         if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT)
-            isPressedLeft = true;
+            isPressedLeft = mykeys.getMoveLeft();
         if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT)
-            isPressedRight = true;
+            isPressedRight = mykeys.getMoveRight();
         if (keycode == Input.Keys.W || keycode == Input.Keys.UP)
-            isPressedUp = true;
+            isPressedUp = mykeys.getMoveUp();
         if(keycode == Input.Keys.S || keycode == Input.Keys.DOWN)
-            isPressedDown = true;
+            isPressedDown = mykeys.getMoveDown();
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode)
     {
+        mykeys.releasekey(keycode);
         if(keycode == Input.Keys.A|| keycode == Input.Keys.LEFT) {
-            player.setVelocityX(0);
-            isPressedLeft = false;
+            if(mykeys.getMoveLeft()== false){
+                player.setVelocityX(0);
+                isPressedLeft = false;
+            }
         }
         if(keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
-            player.setVelocityX(0);
-            isPressedRight = false;
+
+            if(mykeys.getMoveRight()== false){
+                player.setVelocityX(0);
+                isPressedRight = false;
+            }
         }
         if(keycode == Input.Keys.W || keycode == Input.Keys.UP) {
-            player.setVelocityY(0);
-            isPressedUp = false;
+            if(mykeys.getMoveUp()== false){
+                player.setVelocityY(0);
+                isPressedUp = false;
+            }
         }
         if(keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
-            player.setVelocityY(0);
-            isPressedDown = false;
+            if(mykeys.getMoveUp()== false){
+                player.setVelocityY(0);
+                isPressedDown = false;
+            }
+
         }
         return false;
     }
