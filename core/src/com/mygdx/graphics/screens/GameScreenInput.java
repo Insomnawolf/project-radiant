@@ -50,13 +50,9 @@ public class GameScreenInput implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         mykeys.pushkey(keycode);
-        if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT)
             isPressedLeft = mykeys.getMoveLeft();
-        if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT)
             isPressedRight = mykeys.getMoveRight();
-        if (keycode == Input.Keys.W || keycode == Input.Keys.UP)
             isPressedUp = mykeys.getMoveUp();
-        if(keycode == Input.Keys.S || keycode == Input.Keys.DOWN)
             isPressedDown = mykeys.getMoveDown();
         return false;
     }
@@ -65,32 +61,27 @@ public class GameScreenInput implements InputProcessor {
     public boolean keyUp(int keycode)
     {
         mykeys.releasekey(keycode);
-        if(keycode == Input.Keys.A|| keycode == Input.Keys.LEFT) {
             if(mykeys.getMoveLeft()== false){
                 player.setVelocityX(0);
                 isPressedLeft = false;
             }
-        }
-        if(keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
 
             if(mykeys.getMoveRight()== false){
                 player.setVelocityX(0);
                 isPressedRight = false;
             }
-        }
-        if(keycode == Input.Keys.W || keycode == Input.Keys.UP) {
+
             if(mykeys.getMoveUp()== false){
                 player.setVelocityY(0);
                 isPressedUp = false;
             }
-        }
-        if(keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
+
             if(mykeys.getMoveUp()== false){
                 player.setVelocityY(0);
                 isPressedDown = false;
             }
 
-        }
+
         return false;
     }
 
