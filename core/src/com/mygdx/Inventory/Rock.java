@@ -23,7 +23,8 @@ public class Rock extends Item {
 
         //set its position on the screen
         this.position = position;
-        sprite.setPosition(position.x,position.y);
+        sprite.scale(2);
+        sprite.setPosition(position.x+sprite.getWidth(),position.y+sprite.getHeight()/2);
 
 
     }

@@ -52,7 +52,7 @@ public class GameScreen extends ScreenAdapter{
         player = new Player(layer, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2));
 
         //add items
-
+        Rock rock= new Rock(true, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2));
 
 
         //set the camera
@@ -65,6 +65,7 @@ public class GameScreen extends ScreenAdapter{
         Gdx.input.setInputProcessor(input);
 
         //add player to tile map
+        tiledMapRenderer.addSprite(rock.getSprite());
         tiledMapRenderer.addSprite(player.getSprite());
         show();
     }

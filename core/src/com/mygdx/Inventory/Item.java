@@ -29,5 +29,8 @@ public abstract class Item {
     public void update(){
         sprite.setPosition(position.x, position.y);
     }
+    public Sprite getSprite(){
+        return sprite;
+    }
 
 }
