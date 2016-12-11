@@ -8,9 +8,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.entities.Entity;
 import com.mygdx.graphics.renderer.OrthogonalTiledMapSpriteRenderer;
 import com.mygdx.entities.Player;
 import com.mygdx.radiant.RadiantCore;
+
+import java.util.ArrayList;
 
 /**
  * Created by Edward Mondragon on 11/22/2016.
@@ -24,7 +27,7 @@ public class GameScreen extends ScreenAdapter{
     Player player;
     TiledMap tiledMap;
     OrthogonalTiledMapSpriteRenderer tiledMapRenderer;
-
+    private ArrayList<Entity> mapEntities = new ArrayList<Entity>();
     public GameScreen(RadiantCore game)
     {
         this.game = game;

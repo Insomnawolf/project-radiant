@@ -95,6 +95,9 @@ public abstract class Entity {
     public void dispose(){
         img.dispose();
     }
+    public void update(){
+        sprite.setPosition(position.x, position.y);
+    }
 
 
 
