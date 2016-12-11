@@ -22,6 +22,7 @@ public class Rock extends Item {
             sprite = new Sprite(imgUI);
 
         //set its position on the screen
+        this.position = position;
         sprite.setPosition(position.x,position.y);
 
 

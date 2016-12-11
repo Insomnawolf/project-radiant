@@ -17,9 +17,8 @@ public abstract class Item {
     protected Sprite sprite;                      // Sprite to represent the item
     protected Vector2 position;
 
-    public Item(Vector2 position){
-        this.position = position;
-    }
+
+
     public String getName(){return name;}
     public String getDescription(){return description;}
     public void dispose(){

@@ -8,7 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.Inventory.Item;
+import com.mygdx.Inventory.*;
 import com.mygdx.entities.Entity;
 import com.mygdx.graphics.renderer.OrthogonalTiledMapSpriteRenderer;
 import com.mygdx.entities.Player;
@@ -50,6 +50,10 @@ public class GameScreen extends ScreenAdapter{
 
         //add in the player
         player = new Player(layer, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2));
+
+        //add items
+
+
 
         //set the camera
         camera = player.getCamera();
