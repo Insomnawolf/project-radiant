@@ -29,6 +29,27 @@ public abstract class Entity {
         collisionDetector = new CollisionDetector(this, collisionLayer);
     }
 
+    public Entity(TiledMapTileLayer collisionLayer, Vector2 position, Texture texture) {
+        this.position = position;
+        this.collisionLayer = collisionLayer;
+        this.sprite = new Sprite(texture);
+        initializeSprite();
+        collisionDetector = new CollisionDetector(this, collisionLayer);
+    }
+
+    public Entity(TiledMapTileLayer collisionLayer, Vector2 position, Sprite sprite) {
+        this.position = position;
+        this.collisionLayer = collisionLayer;
+        this.sprite = sprite;
+        initializeSprite();
+        collisionDetector = new CollisionDetector(this, collisionLayer);
+    }
+
+    private void initializeSprite() {
+        this.sprite.scale(1f);
+        this.sprite.setPosition(position.x+sprite.getWidth(),position.y+sprite.getHeight()/2);
+    }
+
     public boolean inBoundsCheck() {
 
         float rightBounds = collisionLayer.getWidth() * collisionLayer.getTileWidth();

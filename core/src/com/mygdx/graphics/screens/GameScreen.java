@@ -4,12 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.Inventory.*;
 import com.mygdx.entities.Entity;
+import com.mygdx.entities.npcs.NPC;
 import com.mygdx.graphics.renderer.OrthogonalTiledMapSpriteRenderer;
 import com.mygdx.entities.Player;
 import com.mygdx.radiant.RadiantCore;
@@ -52,7 +55,7 @@ public class GameScreen extends ScreenAdapter{
         player = new Player(layer, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2));
 
         //add items
-        Rock rock= new Rock(true, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2));
+        NPC npc1 = new NPC(layer, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2), new Sprite(new Texture(Gdx.files.internal("NPC_Down.png"))));
 
 
         //set the camera
@@ -65,7 +68,7 @@ public class GameScreen extends ScreenAdapter{
         Gdx.input.setInputProcessor(input);
 
         //add player to tile map
-        tiledMapRenderer.addSprite(rock.getSprite());
+        tiledMapRenderer.addSprite(npc1.getSprite());
         tiledMapRenderer.addSprite(player.getSprite());
         show();
     }

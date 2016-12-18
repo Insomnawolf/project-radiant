@@ -22,9 +22,12 @@ public class RadiantCore extends Game {
 	@Override
 	public void create() {
 		state = SCREEN.GAME;
+
+		// Create and store screens
 		MainMenuScreen mainMenuScreen = new MainMenuScreen(this);
-        GameScreen gameScreen = new GameScreen(this);
 		screenHash.put("mainmenu", mainMenuScreen);
+
+        GameScreen gameScreen = new GameScreen(this);
         screenHash.put("game", gameScreen);
 	}
 
