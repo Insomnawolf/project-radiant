@@ -18,7 +18,8 @@ import java.util.HashMap;
 public class Player extends Entity {
 
     private OrthographicCamera camera;
-
+    private float minSpeed = .5f;
+    private float maxSpeed = 6;
     public Player(TiledMapTileLayer collisionLayer, Vector2 position)
     {
         super(collisionLayer, position);
@@ -30,6 +31,7 @@ public class Player extends Entity {
         sprite.setOrigin(0, 0);
         sprite.setBounds(position.x, position.y, sprite.getWidth(), sprite.getHeight()/2);
         sprite.setScale(1, 2);
+
     }
 
     public void update()
@@ -41,10 +43,10 @@ public class Player extends Entity {
         if(tileProperties.containsKey("speed"))
             movementSpeed = baseSpeed * (float)tileProperties.get("speed");
         //clamp speed
-        if(movementSpeed <= 0.5f)
-            movementSpeed = 0.5f;
-        if(movementSpeed >= 6)
-            movementSpeed = 6;
+        if(movementSpeed <= minSpeed)
+            movementSpeed = minSpeed;
+        if(movementSpeed >= maxSpeed)
+            movementSpeed = maxSpeed;
     }
 
 
