@@ -18,7 +18,9 @@ public abstract class Item {
     protected Vector2 position;
 
 
-
+    public Item(Vector2 position){
+        this.position = position;
+    }
     public String getName(){return name;}
     public String getDescription(){return description;}
     public void dispose(){

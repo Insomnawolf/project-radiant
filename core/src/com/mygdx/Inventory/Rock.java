@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Rock extends Item {
 
     public Rock(Boolean onMap, Vector2 position){
+        super(position);
         name = "Rock";
         description = "Basic stone, pretty hard ...maybe";
         imgMap = new Texture(Gdx.files.internal("RockBasic.png"));

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Coin extends Item {
     public Coin(Vector2 position){
+        super(position);
         name = "Coin";
         description = "Nice shiny circular form of metal... can be used for money... or food for some creatures.";
         this.position = position;

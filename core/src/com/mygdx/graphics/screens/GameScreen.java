@@ -34,9 +34,11 @@ public class GameScreen extends ScreenAdapter{
     private ArrayList<Entity> mapEntities = new ArrayList<Entity>();    //all entities that will be on the map
     private ArrayList<Item> mapItems = new ArrayList<Item>();           //all items that will be on the map
 
+    private Sword sword; //testing
 
     public GameScreen(RadiantCore game)
     {
+        sword = new Sword(new Vector2(0,0), Sword.BASIC_SWORD); //testing shouldn't affect the game
         //???
         this.game = game;
 
@@ -53,11 +55,12 @@ public class GameScreen extends ScreenAdapter{
 
         //add in the player
         player = new Player(layer, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2));
+//        player = new Player(layer, new Vector2(200* tileWidth / 2, layer.getHeight() * tileHeight / 2));
 
         //add items
         NPC npc1 = new NPC(layer, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2), new Sprite(new Texture(Gdx.files.internal("NPC_Down.png"))));
-
-
+        Rock rock1 = new Rock(true, new Vector2(400*tileWidth/2,400*tileHeight/2));
+        System.out.print(layer.getHeight() + " " + tileWidth);
         //set the camera
         camera = player.getCamera();
         camera.setToOrtho(false, width, height);
