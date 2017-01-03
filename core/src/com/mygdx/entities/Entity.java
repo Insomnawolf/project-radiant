@@ -4,6 +4,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.radiant.CollisionDetector;
 
 /**
@@ -21,9 +27,10 @@ public abstract class Entity {
     protected float movementSpeed;
     protected float baseSpeed;
     protected String statusAilment;
+    protected Body b2body;
 
 
-    public Entity(TiledMapTileLayer collisionLayer, Vector2 position) {
+    public Entity(TiledMapTileLayer collisionLayer, Vector2 position, World world) {
         this.position = position;
         this.collisionLayer = collisionLayer;
         collisionDetector = new CollisionDetector(this, collisionLayer);
@@ -112,6 +119,20 @@ public abstract class Entity {
 
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public void defineEntity(World world, Vector2 position, float width, float height){
+        BodyDef bdef = new BodyDef();
+        bdef.position.set(position.x,position.y);
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        b2body = world.createBody(bdef);
+
+        FixtureDef fdef =  new FixtureDef();
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(width/2, height/2);
+        fdef.shape = shape;
+        b2body.createFixture(fdef);
+        //shape.dispose();
     }
     public void dispose(){
         img.dispose();

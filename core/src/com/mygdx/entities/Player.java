@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.radiant.CollisionDetector;
 
 import java.util.ArrayList;
@@ -20,9 +21,9 @@ public class Player extends Entity {
     private OrthographicCamera camera;
     private float minSpeed = .5f;
     private float maxSpeed = 6;
-    public Player(TiledMapTileLayer collisionLayer, Vector2 position)
+    public Player(TiledMapTileLayer collisionLayer, Vector2 position, World world)
     {
-        super(collisionLayer, position);
+        super(collisionLayer, position, world);
         baseSpeed = 3;
         movementSpeed = baseSpeed;
         img = new Texture(Gdx.files.internal("warriorL.png"));
@@ -31,7 +32,7 @@ public class Player extends Entity {
         sprite.setOrigin(0, 0);
         sprite.setBounds(position.x, position.y, sprite.getWidth(), sprite.getHeight()/2);
         sprite.setScale(1, 2);
-
+        defineEntity(world,position,sprite.getWidth(),sprite.getHeight());
     }
 
     public void update()
