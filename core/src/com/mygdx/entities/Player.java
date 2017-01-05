@@ -40,7 +40,8 @@ public class Player extends Entity {
         if(inBoundsCheck())
             collisionDetector.collision();//player is moved here
 
-//        b2body.applyLinearImpulse(new Vector2(0,0));
+//        b2body.applyLinearImpulse(new Vector2(getVelocityX(),getVelocityY()),this.getB2body().getWorldCenter(), true);
+        b2body.setTransform(position,0);
         sprite.setPosition(position.x, position.y);
 
         //apply tile properties

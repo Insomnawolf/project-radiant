@@ -82,9 +82,11 @@ public class GameScreen extends State{
         //add items
         NPC npc1 = new NPC(layer, new Vector2(layer.getWidth() * tileWidth / 2, layer.getHeight() * tileHeight / 2), new Sprite(new Texture(Gdx.files.internal("NPC_Down.png"))));
         Rock rock1 = new Rock(true, new Vector2(40*tileWidth/2,40*tileHeight/2));
-        System.out.print(layer.getHeight() + " " + tileWidth);
+        mapEntities.add(npc1);
+        mapItems.add(rock1);
         //set the camera
         camera = player.getCamera();
+//        camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
         camera.update();
 
@@ -93,8 +95,8 @@ public class GameScreen extends State{
         Gdx.input.setInputProcessor(input);
 
         //add player to tile map
-        tiledMapRenderer.addSprite(npc1.getSprite());
-        tiledMapRenderer.addSprite(player.getSprite());
+//        tiledMapRenderer.addSprite(npc1.getSprite());
+//        tiledMapRenderer.addSprite(player.getSprite());
 //        show();
     }
 
@@ -108,6 +110,10 @@ public class GameScreen extends State{
         for(int i = 0; i < mapItems.size(); i++){
             mapItems.get(i).update();
         }
+
+        camera.position.x = player.getPosX();
+        camera.position.y = player.getPosY();
+        camera.update();
     }
     @Override
     public void handleInput(){
@@ -121,8 +127,6 @@ public class GameScreen extends State{
 //                player.getPosX() + player.getSprite().getWidth()/2,
 //                player.getPosY() + player.getSprite().getHeight()/2,
 //                0);
-        camera.position.x = player.getPosX();
-        camera.position.y = player.getPosY();
         camera.update();
 
         //???
@@ -131,8 +135,16 @@ public class GameScreen extends State{
         renderer.setView(camera);
         renderer.render();
         b2dr.render(world, camera.combined);
+
+        batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(player.getSprite(),Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        batch.draw(player.getSprite(),player.getPosX(),player.getPosY());
+        for(Entity entity : mapEntities){
+            entity.getSprite().draw(batch);
+        }
+        for(Item item : mapItems){
+            item.getSprite().draw(batch);
+        }
 //        player.getSprite().draw(batch);
         batch.end();
 
