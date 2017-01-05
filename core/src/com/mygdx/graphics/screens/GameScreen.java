@@ -1,6 +1,7 @@
 package com.mygdx.graphics.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -67,7 +68,7 @@ public class GameScreen extends State{
         float height = Gdx.graphics.getHeight();
 
         //load the tile map
-        tiledMap = new TmxMapLoader().load("test.tmx");
+        tiledMap = new TmxMapLoader().load("test2.tmx");
         tiledMapRenderer = new OrthogonalTiledMapSpriteRenderer(tiledMap, world);
         TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0); // dont think we'll need this
         renderer = new OrthogonalTiledMapRenderer(tiledMap);
@@ -112,15 +113,15 @@ public class GameScreen extends State{
     @Override
     public void handleInput(){
         //if any key inputs or mouse inputs are needed place them here
-
+        if(Gdx.input.isKeyPressed(Input.Keys.Z)){
+            camera.position.set(camera.position.x-100,camera.position.y,camera.position.z);
+        }
 
     }
     public void render(SpriteBatch batch) {
 
-        batch.begin();
-        batch.draw(player.getTexture(),player.getPosX(),player.getPosY());
         //Update camera
-        camera.position.set(player.getPosX() + player.getSprite().getWidth()/2, player.getPosY() + player.getSprite().getHeight()/2, 0);
+//        camera.position.set(player.getPosX() + player.getSprite().getWidth()/2, player.getPosY() + player.getSprite().getHeight()/2, 0);
         camera.update();
 
         //???
@@ -129,6 +130,8 @@ public class GameScreen extends State{
         renderer.setView(camera);
         renderer.render();
         b2dr.render(world, camera.combined);
+        batch.begin();
+        batch.draw(player.getSprite(),player.getPosX(),player.getPosY());
         batch.end();
     }
 

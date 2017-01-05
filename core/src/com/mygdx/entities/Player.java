@@ -39,6 +39,7 @@ public class Player extends Entity {
     {
         if(inBoundsCheck())
             collisionDetector.collision();//player is moved here
+
 //        b2body.applyLinearImpulse(new Vector2(0,0));
         sprite.setPosition(position.x, position.y);
 
@@ -65,7 +66,5 @@ public class Player extends Entity {
     {
         img.dispose();
     }
-    public Texture getTexture(){
-        return img;
-    }
+
 }

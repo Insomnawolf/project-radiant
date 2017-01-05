@@ -137,6 +137,9 @@ public abstract class Entity {
     public Body getB2body(){
         return b2body;
     }
+    public Texture getTexture(){
+        return img;
+    }
 
     public void dispose(){
         img.dispose();
