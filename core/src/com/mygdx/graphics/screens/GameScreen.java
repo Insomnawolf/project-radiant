@@ -88,6 +88,7 @@ public class GameScreen extends State{
         camera = player.getCamera();
 //        camera = new OrthographicCamera();
         camera.setToOrtho(false, width, height);
+        camera.zoom = .5f;
         camera.update();
 
         //set up input listener
@@ -138,14 +139,13 @@ public class GameScreen extends State{
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        batch.draw(player.getSprite(),player.getPosX(),player.getPosY());
         for(Entity entity : mapEntities){
             entity.getSprite().draw(batch);
         }
         for(Item item : mapItems){
             item.getSprite().draw(batch);
         }
-//        player.getSprite().draw(batch);
+        player.getSprite().draw(batch);
         batch.end();
 
     }

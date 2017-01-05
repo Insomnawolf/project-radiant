@@ -33,6 +33,7 @@ public class Player extends Entity {
         sprite.setBounds(position.x, position.y, sprite.getWidth(), sprite.getHeight()/2);
         sprite.setScale(1, 2);
         defineEntity(world,position,sprite.getWidth(),sprite.getHeight());
+
     }
 
     public void update()
