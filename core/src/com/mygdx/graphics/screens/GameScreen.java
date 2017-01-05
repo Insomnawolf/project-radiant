@@ -102,7 +102,6 @@ public class GameScreen extends State{
         world.step(delta,6,2); //6,2 are recommended
         input.processInput();
         player.update();
-//        player.getSprite().draw(game.batch);
         for(int i = 0; i < mapEntities.size(); i++){
             mapEntities.get(i).update();
         }
@@ -113,15 +112,17 @@ public class GameScreen extends State{
     @Override
     public void handleInput(){
         //if any key inputs or mouse inputs are needed place them here
-        if(Gdx.input.isKeyPressed(Input.Keys.Z)){
-            camera.position.set(camera.position.x-100,camera.position.y,camera.position.z);
-        }
 
     }
     public void render(SpriteBatch batch) {
 
         //Update camera
-//        camera.position.set(player.getPosX() + player.getSprite().getWidth()/2, player.getPosY() + player.getSprite().getHeight()/2, 0);
+//        camera.position.set(
+//                player.getPosX() + player.getSprite().getWidth()/2,
+//                player.getPosY() + player.getSprite().getHeight()/2,
+//                0);
+        camera.position.x = player.getPosX();
+        camera.position.y = player.getPosY();
         camera.update();
 
         //???
@@ -131,8 +132,10 @@ public class GameScreen extends State{
         renderer.render();
         b2dr.render(world, camera.combined);
         batch.begin();
-        batch.draw(player.getSprite(),player.getPosX(),player.getPosY());
+        batch.draw(player.getSprite(),Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+//        player.getSprite().draw(batch);
         batch.end();
+
     }
 
     public void resize(int width, int height) {
