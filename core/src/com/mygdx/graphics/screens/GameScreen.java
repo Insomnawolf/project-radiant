@@ -6,10 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -22,7 +24,7 @@ import com.mygdx.entities.Entity;
 import com.mygdx.entities.npcs.NPC;
 import com.mygdx.graphics.renderer.OrthogonalTiledMapSpriteRenderer;
 import com.mygdx.entities.Player;
-import com.mygdx.radiant.RadiantCore;
+import com.mygdx.radiant.*;
 
 import java.util.ArrayList;
 
@@ -30,7 +32,7 @@ import java.util.ArrayList;
  * Created by Edward Mondragon on 11/22/2016.
  */
 
-public class GameScreen extends ScreenAdapter{
+public class GameScreen extends State{
 
     private int numPlayers = 0;
     private RadiantCore game;
@@ -44,7 +46,7 @@ public class GameScreen extends ScreenAdapter{
     Player player;
     TiledMap tiledMap;
     TmxMapLoader mapLoader;
-    OrthoCachedTiledMapRenderer renderer;
+    OrthogonalTiledMapRenderer renderer;
     OrthogonalTiledMapSpriteRenderer tiledMapRenderer;
 
     private ArrayList<Entity> mapEntities = new ArrayList<Entity>();    //all entities that will be on the map
@@ -52,14 +54,13 @@ public class GameScreen extends ScreenAdapter{
 
     private Sword sword; //testing
 
-    public GameScreen(RadiantCore game)
+//    public GameScreen(RadiantCore game)
+    public GameScreen(GameStateManager gsm)
     {
+        super(gsm);
         //establish the world for box2d
         world = new World(new Vector2(0,0), true); // World ->(Vect2 (forces), BOOL don't calculate bodies at rest)
         b2dr = new Box2DDebugRenderer();
-
-        //???
-        this.game = game;
 
         //Set up window bounds
         float width = Gdx.graphics.getWidth();
@@ -67,8 +68,9 @@ public class GameScreen extends ScreenAdapter{
 
         //load the tile map
         tiledMap = new TmxMapLoader().load("test.tmx");
-        tiledMapRenderer = new OrthogonalTiledMapSpriteRenderer(tiledMap);
-        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
+        tiledMapRenderer = new OrthogonalTiledMapSpriteRenderer(tiledMap, world);
+        TiledMapTileLayer layer = (TiledMapTileLayer)tiledMap.getLayers().get(0); // dont think we'll need this
+        renderer = new OrthogonalTiledMapRenderer(tiledMap);
         float tileWidth = layer.getTileWidth();
         float tileHeight = layer.getTileHeight();
 
@@ -92,61 +94,47 @@ public class GameScreen extends ScreenAdapter{
         //add player to tile map
         tiledMapRenderer.addSprite(npc1.getSprite());
         tiledMapRenderer.addSprite(player.getSprite());
-        show();
+//        show();
     }
 
-    @Override
-    public void render(float delta) {
-
-
+    public void update(float delta){
         world.step(delta,6,2); //6,2 are recommended
-        b2dr.render(world, camera.combined);
-        //Listen for inputs
         input.processInput();
-
-        //meh
-        Gdx.gl.glClearColor(0, 1, 1, 1);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        //Update map objects
         player.update();
+//        player.getSprite().draw(game.batch);
         for(int i = 0; i < mapEntities.size(); i++){
             mapEntities.get(i).update();
         }
         for(int i = 0; i < mapItems.size(); i++){
             mapItems.get(i).update();
         }
+    }
+    @Override
+    public void handleInput(){
+        //if any key inputs or mouse inputs are needed place them here
 
+
+    }
+    public void render(SpriteBatch batch) {
+
+        batch.begin();
+        batch.draw(player.getTexture(),player.getPosX(),player.getPosY());
         //Update camera
         camera.position.set(player.getPosX() + player.getSprite().getWidth()/2, player.getPosY() + player.getSprite().getHeight()/2, 0);
         camera.update();
 
         //???
-        tiledMapRenderer.setView(camera);
-        tiledMapRenderer.render();
-
+//        tiledMapRenderer.setView(camera);
+//        tiledMapRenderer.render();
+        renderer.setView(camera);
+        renderer.render();
+        b2dr.render(world, camera.combined);
+        batch.end();
     }
 
-    @Override
     public void resize(int width, int height) {
         float aspectRatio = (float) width / (float) height;
         camera = new OrthographicCamera(2f * aspectRatio, 2f);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
     }
 
     public World getWorld(){

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -11,16 +12,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.radiant.GameStateManager;
 import com.mygdx.radiant.RadiantCore;
+import com.mygdx.radiant.State;
 
-public class MainMenuScreen extends ScreenAdapter {
+public class MainMenuScreen extends State {
 
     RadiantCore game;
 
     private Stage stage;
     private Table table;
 
-    public MainMenuScreen(RadiantCore game) {
+    public MainMenuScreen(GameStateManager gsm) {
+        super(gsm);
         this.game = game;
         System.out.println("Main menu loaded.");
 
@@ -43,6 +47,21 @@ public class MainMenuScreen extends ScreenAdapter {
         //newGameButton.setPosition(500, 500);
 
         table.addActor(newGameButton);
+
+    }
+
+    @Override
+    public void handleInput() {
+
+    }
+
+    @Override
+    public void update(float dt) {
+
+    }
+
+    @Override
+    public void render(SpriteBatch sb) {
 
     }
 

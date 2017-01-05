@@ -134,6 +134,10 @@ public abstract class Entity {
         b2body.createFixture(fdef);
         //shape.dispose();
     }
+    public Body getB2body(){
+        return b2body;
+    }
+
     public void dispose(){
         img.dispose();
     }

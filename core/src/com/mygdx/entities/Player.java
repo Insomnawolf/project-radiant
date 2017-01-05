@@ -38,8 +38,11 @@ public class Player extends Entity {
     public void update()
     {
         if(inBoundsCheck())
-            collisionDetector.collision();
+            collisionDetector.collision();//player is moved here
+//        b2body.applyLinearImpulse(new Vector2(0,0));
         sprite.setPosition(position.x, position.y);
+
+        //apply tile properties
         HashMap<Object, Float> tileProperties = collisionDetector.checkEntityTile();
         if(tileProperties.containsKey("speed"))
             movementSpeed = baseSpeed * (float)tileProperties.get("speed");
@@ -61,5 +64,8 @@ public class Player extends Entity {
     public void dispose()
     {
         img.dispose();
+    }
+    public Texture getTexture(){
+        return img;
     }
 }
