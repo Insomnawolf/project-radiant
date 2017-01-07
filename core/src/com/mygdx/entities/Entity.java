@@ -16,7 +16,7 @@ import com.mygdx.radiant.CollisionDetector;
  * Created by Clifford Hill on 11/30/2016.
  */
 
-public abstract class Entity {
+public abstract class Entity  {
 
     protected Vector2 position;
     protected Texture img;

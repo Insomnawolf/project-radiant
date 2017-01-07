@@ -12,9 +12,10 @@ public class DesktopLauncher {
 		//System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
 
         // Size of window when windowed, or resolution when fullscreen
-        config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
-        config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
-
+//        config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
+//        config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
+		config.width = 1900;
+		config.height = 1200;
         config.fullscreen = false;
 
 		new LwjglApplication(new RadiantCore(), config);

@@ -10,6 +10,8 @@ import com.mygdx.graphics.screens.*;
 import java.util.HashMap;
 
 public class RadiantCore extends Game {
+	public static final int V_WIDTH = 1900;
+	public static final int V_HEIGHT = 1200;
     private HashMap<String, State> screenHash = new HashMap<String, State>();
 	private Screen currentScreen;
 	public SpriteBatch batch;

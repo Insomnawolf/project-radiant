@@ -16,7 +16,7 @@ import java.util.HashMap;
  * Created by Edward Mondragon on 11/26/2016.
  */
 
-public class Player extends Entity {
+public class Player extends Entity  {
 
     private OrthographicCamera camera;
     private float minSpeed = .5f;
@@ -29,11 +29,11 @@ public class Player extends Entity {
         img = new Texture(Gdx.files.internal("warriorL.png"));
         sprite = new Sprite(img);
         camera = new OrthographicCamera();
-        sprite.setOrigin(0, 0);
-        sprite.setBounds(position.x, position.y, sprite.getWidth(), sprite.getHeight()/2);
-        sprite.setScale(1, 2);
-        defineEntity(world,position,sprite.getWidth(),sprite.getHeight());
 
+//        sprite.setBounds(position.x, position.y, sprite.getWidth(), sprite.getHeight());
+//        sprite.setScale(1, 2);
+        defineEntity(world,position,sprite.getWidth(),sprite.getHeight());
+        sprite.setOrigin(b2body.getPosition().x, b2body.getPosition().y);
     }
 
     public void update()
@@ -42,7 +42,11 @@ public class Player extends Entity {
             collisionDetector.collision();//player is moved here
 
 //        b2body.applyLinearImpulse(new Vector2(getVelocityX(),getVelocityY()),this.getB2body().getWorldCenter(), true);
-        b2body.setTransform(position,0);
+//move b2body
+//        b2body.setTransform(position,0);
+
+        b2body.setLinearVelocity(getVelocityX(),getVelocityY());
+
         sprite.setPosition(position.x, position.y);
 
         //apply tile properties

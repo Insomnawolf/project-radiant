@@ -20,6 +20,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.Inventory.*;
 import com.mygdx.entities.Entity;
 import com.mygdx.entities.npcs.NPC;
@@ -29,6 +31,8 @@ import com.mygdx.radiant.*;
 
 import java.util.ArrayList;
 
+import static com.mygdx.Box2dStuff.Box2dVars.PPM;
+
 /**
  * Created by Edward Mondragon on 11/22/2016.
  */
@@ -37,6 +41,7 @@ public class GameScreen extends State{
 
     private int numPlayers = 0;
     private RadiantCore game;
+    private Viewport gamePort;
 
     //box 2d variables
     private World world;
@@ -59,6 +64,9 @@ public class GameScreen extends State{
     public GameScreen(GameStateManager gsm)
     {
         super(gsm);
+
+        gamePort = new FitViewport(RadiantCore.V_WIDTH/PPM, RadiantCore.V_HEIGHT/PPM, camera);
+//        camera.position.set(gamePort.getWorldWidth()/2,gamePort.getWorldHeight());
         //establish the world for box2d
         world = new World(new Vector2(0,0), true); // World ->(Vect2 (forces), BOOL don't calculate bodies at rest)
         b2dr = new Box2DDebugRenderer();
